@@ -3,13 +3,12 @@ import Entry from "./Entry";
 var value = 200;
 var allEntries: Entry[] = [];
 
-
 var button = document.getElementById("newValue");
-button.addEventListener("click", newValue);
+button?.addEventListener("click", newValue);
 function newValue(){
     let name = prompt("Name:")
-    let price = parseInt(prompt("Price:"));
-    let date = parseInt(prompt("Date:"));
+    let price = parseInt(prompt("Price:")!);
+    let date = parseInt(prompt("Date:")!);
     if(name != null && price != null && date != null){
         createNewEntry(name, price, date);
     }
