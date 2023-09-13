@@ -23,10 +23,9 @@ export default class entry{
         return this.check;
     }
     setPrice(price: number){
-        this.price = price;
+        this.price = price; 
     }
     getPrice(){
         return this.price;
     }
 }
-
