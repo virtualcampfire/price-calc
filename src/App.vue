@@ -1,27 +1,36 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+  <Home/>
+  <div v-if="cookieValue !== null" v-for="item in cookieValue">
+    <Item :item="item"></Item>
+  </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import HelloWorld from './components/HelloWorld.vue';
+import Home from './components/Home.vue';
+
+import Item from './components/Item.vue';
+
+import Entry from './Models/Entry';
+
+interface cookie {
+    cookieValue: null | Entry[];
+}
+
 
 export default defineComponent({
   name: 'App',
   components: {
-    HelloWorld
-  }
+    Home,
+    Item
+  },
+  data(): cookie{
+        return {
+            cookieValue: null,
+        };
+    },
+  mounted() {
+        this.cookieValue = JSON.parse(localStorage.getItem('myCookie') || 'null');
+    },
 });
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
