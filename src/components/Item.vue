@@ -1,8 +1,10 @@
 <template>
-    <div class="entry">
-        <div class="entry-prop" v-if="item">{{ item.name }}</div>
-        <div class="entry-prop" v-if="item">{{ item.price }}</div>
-        <div class="entry-prop" v-if="item">{{ item.date }}</div>
+    <div class="entry" v-if="item">
+        <div class="entry-prop">{{ item.name }}</div>
+        <div class="entry-prop">{{ item.price }}</div>
+        <div class="entry-prop">{{ item.date }}</div>
+        <div class="entry-prop"><input type="checkbox" :checked="item.check" @change="changeCheck(item.check)"></div>
+        <div class="entry-prop"><input type="button" value="Entfernen" @click="deleteEntry()"></div>
     </div>
   </template>
   
@@ -42,6 +44,13 @@
                 localStorage.setItem('myCookie', JSON.stringify(this.cookieValue));
             }
         },
+        deleteEntry(){
+            this.$emit('delete-item', this.item);
+        },
+        changeCheck(check: boolean){
+            this.$emit('change-check', check, this.item);
+            console.log(check);
+        }
     },
   });
   </script>
