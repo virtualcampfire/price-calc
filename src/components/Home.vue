@@ -3,7 +3,7 @@
     Hallo das ist ein Rechner
     <AddEntrie @update-entries="updateEntries"/>
     <div v-if="cookieValue !== null" v-for="item in cookieValue">
-      <Item :item="item"/>
+      <Item @delete-item="deleteItem" @change-check="changeCheck" :item="item"/>
     </div>
   </div>
 </template>
@@ -38,6 +38,25 @@ export default defineComponent({
       console.log("Okay");
       this.cookieValue = JSON.parse(localStorage.getItem('myCookie') || 'null');
     },
+    deleteItem(item: Entry) {
+      const index = this.cookieValue?.indexOf(item);
+      if (index !== undefined && index !== null) {
+        this.cookieValue?.splice(index, 1);
+        localStorage.setItem('myCookie', JSON.stringify(this.cookieValue));
+      }
+    },
+    changeCheck(check: boolean, item: Entry): void {
+      console.log(check);
+      console.log(item);
+
+      this.cookieValue?.forEach((element) => {
+        if (element === item) {
+          element.check = !check;
+          localStorage.setItem('myCookie', JSON.stringify(this.cookieValue));
+          console.log(localStorage.getItem('myCookie'));
+        }
+      });
+  }
   }
 });
 </script>
