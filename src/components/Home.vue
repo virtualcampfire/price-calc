@@ -1,14 +1,36 @@
 <template>
   <div>
-    Hallo das ist ein Rechner
-    <AddEntrie @update-entries="updateEntries"/>
-    <div v-if="cookieValue !== null" v-for="item in cookieValue">
-      <Item @delete-item="deleteItem" @change-check="changeCheck" :item="item"/>
+    <div class="container">
+      <input type="button" class="nav-button" value="Neuer Grundbeitrag" @click="showNewBeitrag = !showNewBeitrag, showNewEntrie = false">
+      <input type="button" class="nav-button" value="Beitrag hinzufügen" @click="showNewEntrie = !showNewEntrie, showNewBeitrag = false">
+    </div>
+    <div class="container" v-if="showNewBeitrag">
+      <input class="input" placeholder="Nutzbarer Betrag" id="nutzbarerBetrag">
+      <input class="saveButton" type="button" value="Speichern" @click="changeNutzbarerBetrag">
+    </div>
+    <div class="container" v-if="showNewEntrie">
+      <AddEntrie @update-entries="updateEntries"/>
     </div>
     <div>
-      Gesamtausgaben: {{sum}}
-      <br>
-      Gesamtausgaben abgerechnet: {{sumCheck}}
+    </div>
+    <div class="container">
+      <div class="items">
+        <div v-if="cookieValue !== null" v-for="item in cookieValue">
+          <Item @delete-item="deleteItem" @change-check="changeCheck" :item="item"/>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="statistic">
+        <div class="container">
+          <div class="statistic-prop">Gesamtkosten: {{ sum }}</div>
+          <div class="statistic-prop">Überschuss: {{ ueberschuss }}</div>
+        </div>
+        <div class="container">
+          <div class="statistic-prop">Checked: {{ sumCheck }}</div>
+          <div class="statistic-prop">Grundbeitrag: {{ nutzbarerBetrag }}</div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -31,6 +53,10 @@ export default defineComponent({
       cookieValue: Array<Entry>(),
       sum: 0,
       sumCheck: 0,
+      nutzbarerBetrag: 0, 
+      ueberschuss: 0,
+      showNewEntrie: false,
+      showNewBeitrag: false,
     };
   },
   mounted() {
@@ -39,10 +65,12 @@ export default defineComponent({
   methods: {
     updateEntries() {
       this.cookieValue = JSON.parse(localStorage.getItem('myCookie') || 'null');
+      this.checkEntriesIfDayOfTheMonthIsLowerThanToday();
       this.getSum();
       this.getSumChecked();
-      this.checkEntriesIfDayOfTheMonthIsLowerThanToday();
       this.sortEntriesByDate();
+      this.nutzbarerBetrag = JSON.parse(localStorage.getItem('nutzbarerBetrag') || 'null');
+      this.getGesamtUeberschuss()
     },
     deleteItem(item: Entry) {
       const index = this.cookieValue?.indexOf(item);
@@ -53,14 +81,10 @@ export default defineComponent({
       this.updateEntries();
     },
     changeCheck(check: boolean, item: Entry): void {
-      console.log(check);
-      console.log(item);
-
       this.cookieValue?.forEach((element) => {
         if (element === item) {
           element.check = !check;
           localStorage.setItem('myCookie', JSON.stringify(this.cookieValue));
-          console.log(localStorage.getItem('myCookie'));
         }
       });
       this.updateEntries();
@@ -91,7 +115,83 @@ export default defineComponent({
     sortEntriesByDate() {
       this.cookieValue?.sort((a, b) => a.date - b.date);
     },
+    changeNutzbarerBetrag(){
+      let betrag = document.getElementById('nutzbarerBetrag') as HTMLInputElement;
+      this.nutzbarerBetrag = Number(betrag.value)
+      localStorage.setItem('nutzbarerBetrag', JSON.stringify(this.nutzbarerBetrag));
+      this.updateEntries();
+    },
+    getGesamtUeberschuss(){
+      this.ueberschuss = this.nutzbarerBetrag - this.sum;
+    }
   }
 });
 </script>
+
+<style scoped>
+.container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.nav-button{
+  margin: 10px;
+  border-radius: 10px;
+  border-style: solid;
+  border-color: rgba(34 149 255);
+  background-color: rgba(34 149 255);
+  color: white;
+  padding: 10px;
+  font-size: 10px;
+  font-weight: bold;
+}
+.input{
+  margin: 10px;
+  border-radius: 10px;
+  border-style: solid;
+  border-color: rgba(34 149 255);
+  background-color: rgba(34 149 255);
+  color: white;
+  padding: 10px;
+  font-size: 10px;
+  font-weight: bold;
+  ::placeholder {
+    color: #ccc;
+  }
+}
+.saveButton{
+  margin: 10px;
+  border-radius: 10px;
+  border-style: solid;
+  border-color: rgba(34 149 255);
+  background-color: rgba(34 149 255);
+  color: white;
+  padding: 10px;
+  font-size: 10px;
+  font-weight: bold;
+}
+.statistic{
+  width: 100%;
+  text-align: center;
+}
+.statistic-prop{
+  margin: 10px;
+  border-radius: 10px;
+  border-style: solid;
+  border-color: rgba(34 149 255);
+  background-color: rgba(34 149 255);
+  color: white;
+  padding: 10px;
+  font-size: 10px;
+  font-weight: bold;
+  width: 50%;
+}
+.items{
+  height: calc(100vh - 200px);
+  max-height: calc(100vh - 250px);
+  overflow: scroll;
+  overflow-x: hidden;
+  max-width: 800px;
+}
+</style>  
 

@@ -1,9 +1,9 @@
 <template>
     <div>
-      <input placeholder="Bezeichnung" id="name">
-      <input type="number" placeholder="Betrag" id="price">
-      <input type="number" placeholder="Monatstag" id="date">
-      <input type="button" value="Hinzufügen" @click="addEntry">
+      <input placeholder="Bezeichnung" id="name" class="input">
+      <input class="input" type="number" placeholder="Betrag" id="price">
+      <input class="input" type="number" placeholder="Monatstag" id="date">
+      <input class="saveButton" type="button" value="Hinzufügen" @click="addEntry">
     </div>
   </template>
   
@@ -43,4 +43,32 @@
     },
   });
   </script>
+
+  <style scoped>
+    .input{
+  margin: 10px;
+  border-radius: 10px;
+  border-style: solid;
+  border-color: rgba(34 149 255);
+  background-color: rgba(34 149 255);
+  color: white;
+  padding: 10px;
+  font-size: 10px;
+  font-weight: bold;
+}
+.input::placeholder {
+  color: white;
+}
+.saveButton{
+  margin: 10px;
+  border-radius: 10px;
+  border-style: solid;
+  border-color: rgba(34 149 255);
+  background-color: rgba(34 149 255);
+  color: white;
+  padding: 10px;
+  font-size: 10px;
+  font-weight: bold;
+}
+</style>
   

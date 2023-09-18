@@ -4,7 +4,7 @@
         <div class="entry-prop">{{ item.price }}</div>
         <div class="entry-prop">{{ item.date }}</div>
         <div class="entry-prop"><input type="checkbox" :checked="item.check" @change="changeCheck(item.check)"></div>
-        <div class="entry-prop"><input type="button" value="Entfernen" @click="deleteEntry()"></div>
+        <div class="entry-prop"> <img src="../../public/delete.png" style="width: 10px;" @click="deleteEntry"></div>
     </div>
   </template>
   
@@ -61,9 +61,12 @@
             align-items: center;
             justify-content: center;
             border-style: solid;
-            border-radius: 20px;
-            padding: 20px;
+            border-radius: 10px;
+            padding: 10px;
             margin-bottom: 10px;
+            border-color: rgba(34 149 255);
+            background-color: #f9f9f9;
+            font: icon;
         }
         .entry-prop{
             width: 200px;
