@@ -30,7 +30,7 @@
         const name = document.getElementById('name') as HTMLInputElement;
         const price = document.getElementById('price') as HTMLInputElement;
         const date = document.getElementById('date') as HTMLInputElement;
-        const entry = new Entry(name.value, Number(price.value), Number(date.value), true);
+        const entry = new Entry(name.value, Number(price.value), Number(date.value), false);
   
         if (this.cookieValue === null) {
           localStorage.setItem('myCookie', JSON.stringify([entry]));

@@ -60,6 +60,10 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            border-style: solid;
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 10px;
         }
         .entry-prop{
             width: 200px;
