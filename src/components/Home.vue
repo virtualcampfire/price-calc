@@ -146,30 +146,32 @@ export default defineComponent({
   font-weight: bold;
 }
 .input{
-  margin: 10px;
-  border-radius: 10px;
-  border-style: solid;
-  border-color: rgba(34 149 255);
-  background-color: rgba(34 149 255);
-  color: white;
-  padding: 10px;
-  font-size: 10px;
-  font-weight: bold;
-  ::placeholder {
-    color: #ccc;
+      border-radius: 10px;
+      border-style: solid;
+      border-color: rgba(34 149 255);
+      background-color: rgba(34 149 255);
+      color: white;
+      font-size: 10px;
+      font-weight: bold;
+      padding: 10px;
+      margin: 10px;
+      width: 80%;
+    }
+  .input::placeholder {
+    color: white;
   }
-}
-.saveButton{
-  margin: 10px;
-  border-radius: 10px;
-  border-style: solid;
-  border-color: rgba(34 149 255);
-  background-color: rgba(34 149 255);
-  color: white;
-  padding: 10px;
-  font-size: 10px;
-  font-weight: bold;
-}
+  .saveButton{
+    border-radius: 10px;
+    border-style: solid;
+    border-color: rgba(34 149 255);
+    background-color: rgba(34 149 255);
+    color: white;
+    font-size: 10px;
+    font-weight: bold;
+    width: 80%;
+    padding: 10px;
+    margin: 10px;
+  }
 .statistic{
   width: 100%;
   text-align: center;

@@ -1,9 +1,17 @@
 <template>
-    <div>
+  <div style="width: 100%">
+    <div class="container">
       <input placeholder="Bezeichnung" id="name" class="input">
+    </div>
+    <div class="container">
       <input class="input" type="number" placeholder="Betrag" id="price">
+    </div>
+    <div class="container">
       <input class="input" type="number" placeholder="Monatstag" id="date">
+    </div>
+    <div class="container">
       <input class="saveButton" type="button" value="Hinzufügen" @click="addEntry">
+    </div>
     </div>
   </template>
   
@@ -46,29 +54,37 @@
 
   <style scoped>
     .input{
-  margin: 10px;
-  border-radius: 10px;
-  border-style: solid;
-  border-color: rgba(34 149 255);
-  background-color: rgba(34 149 255);
-  color: white;
-  padding: 10px;
-  font-size: 10px;
-  font-weight: bold;
-}
-.input::placeholder {
-  color: white;
-}
-.saveButton{
-  margin: 10px;
-  border-radius: 10px;
-  border-style: solid;
-  border-color: rgba(34 149 255);
-  background-color: rgba(34 149 255);
-  color: white;
-  padding: 10px;
-  font-size: 10px;
-  font-weight: bold;
-}
+      border-radius: 10px;
+      border-style: solid;
+      border-color: rgba(34 149 255);
+      background-color: rgba(34 149 255);
+      color: white;
+      font-size: 10px;
+      font-weight: bold;
+      padding: 10px;
+      margin: 10px;
+      width: 80%;
+    }
+  .input::placeholder {
+    color: white;
+  }
+  .saveButton{
+    border-radius: 10px;
+    border-style: solid;
+    border-color: rgba(34 149 255);
+    background-color: rgba(34 149 255);
+    color: white;
+    font-size: 10px;
+    font-weight: bold;
+    width: 80%;
+    padding: 10px;
+    margin: 10px;
+  }
+  .container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
 </style>
   

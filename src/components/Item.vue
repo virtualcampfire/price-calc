@@ -1,10 +1,14 @@
 <template>
     <div class="entry" v-if="item">
-        <div class="entry-prop">{{ item.name }}</div>
-        <div class="entry-prop">{{ item.price }}</div>
-        <div class="entry-prop">{{ item.date }}</div>
-        <div class="entry-prop"><input type="checkbox" :checked="item.check" @change="changeCheck(item.check)"></div>
-        <div class="entry-prop"> <img src="../../public/delete.png" style="width: 10px;" @click="deleteEntry"></div>
+        <div class="container">
+            <div class="entry-prop-name">{{ item.name }}</div>
+        </div>
+        <div class="container">
+            <div class="entry-prop">{{ item.price }}</div>
+            <div class="entry-prop">{{ item.date }}</div>
+            <div class="entry-prop"><input type="checkbox" :checked="item.check" @change="changeCheck(item.check)"></div>
+            <div class="entry-prop"> <img src="../../public/delete.png" style="width: 20px;" @click="deleteEntry"></div>
+        </div>
     </div>
   </template>
   
@@ -70,5 +74,15 @@
         }
         .entry-prop{
             width: 200px;
+            text-align: center;
+        }
+        .container{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50%;
+        }
+        .entry-prop-name{
+            text-align: left;
         }
     </style>
